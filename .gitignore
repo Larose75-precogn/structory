@@ -1,3 +1,21 @@
-# Godot 4+ specific ignores
+# Godot exports
+export/
+*.pck
+*.wasm
+*.js
+*.html
+*.png
+!worker/public/.gitkeep
+
+# Godot 4+
 .godot/
-/android/
+*.import
+*.uid
+
+# Cloudflare
+worker/node_modules/
+worker/.wrangler/
+
+# OS
+.DS_Store
+Thumbs.db
