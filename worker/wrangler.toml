@@ -2,5 +2,17 @@ name = "precogn-worker"
 main = "src/index.js"
 compatibility_date = "2025-01-01"
 
-[site]
-bucket = "./public"
+routes = [
+  { pattern = "precogn.org/*", zone_name = "precogn.org" }
+]
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+[[headers]]
+for = "/*"
+[headers.values]
+Cross-Origin-Opener-Policy = "same-origin"
+Cross-Origin-Embedder-Policy = "require-corp"
+Cross-Origin-Resource-Policy = "cross-origin"
