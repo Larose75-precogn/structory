@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://clrj3mm5bryed"]
+
+[ext_resource type="PackedScene" uid="uid://vsljy1mmnadn" path="res://flow.tscn" id="1_glv2v"]
+
+[node name="Main" type="Node2D" unique_id=146113336]
+
+[node name="Flow" parent="." unique_id=422072899 instance=ExtResource("1_glv2v")]

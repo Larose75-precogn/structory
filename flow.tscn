@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://vsljy1mmnadn"]
+
+[ext_resource type="Script" uid="uid://dl4ymk2kperhn" path="res://flow.gd" id="1_e3o6r"]
+
+[node name="Flow" type="Node2D" unique_id=422072899]
+script = ExtResource("1_e3o6r")
+
+[node name="Pulse" type="Node2D" parent="." unique_id=62799655]
