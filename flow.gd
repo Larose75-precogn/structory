@@ -102,8 +102,8 @@ func _draw_tendrils(center: Vector2, base_radius: float):
 			var wave_offset := sin(t * TAU + breath_time * 2.0 + i) * 3.0
 			pos += perp * wave_offset
 
-			var dot_alpha := flow_alpha * (1.0 - t) * 0.6
-			var dot_size := lerp(3.0, 1.0, t)
+			var dot_alpha: float = flow_alpha * (1.0 - t) * 0.6
+			var dot_size: float = lerp(3.0, 1.0, t)
 			draw_circle(pos, dot_size, Color(color.r, color.g, color.b, dot_alpha))
 
 
@@ -112,9 +112,9 @@ func _input(event):
 		return
 
 	if event is InputEventMouseButton and event.pressed:
-		var mouse_pos := event.position
-		var center := get_viewport_rect().size / 2
-		var dist := center.distance_to(mouse_pos)
+		var mouse_pos: Vector2 = event.position
+		var center: Vector2 = get_viewport_rect().size / 2
+		var dist: float = center.distance_to(mouse_pos)
 
 		if dist <= clickable_radius:
 			exploded = true
