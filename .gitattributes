@@ -1,2 +1,9 @@
 # Normalize EOL for all files that Git considers text files.
 * text=auto eol=lf
+
+# GitHub Linguist: exclude Godot files from language detection
+*.gd linguist-detectable=false
+*.tscn linguist-detectable=false
+*.uid linguist-detectable=false
+*.godot/** linguist-detectable=false
+.godot/** linguist-detectable=false
