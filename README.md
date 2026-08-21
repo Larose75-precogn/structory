@@ -87,16 +87,34 @@ Raising **€150k** · founder pseudonymous by choice · fully bootstrapped to d
 
 Structory is not one repository — it is a small set of focused services, each open and verifiable:
 
+**Core**
+
 | Repository | What it implements |
 |---|---|
 | [`ledger_api`](https://github.com/Larose75-precogn/ledger_api) | The journal — `ledger-cli` engine, FEC export, PCG rules, write-access roles |
-| [`analyzor`](https://github.com/Larose75-precogn/analyzor) | Bricks registry, BYOS / Drive, rules cascade, Docling, LLM, intent understanding |
-| [`executor`](https://github.com/Larose75-precogn/executor) | Orchestration + bank connectors (Powens, Enable Banking, Mercury, Qonto) |
-| [`subscriptions_api`](https://github.com/Larose75-precogn/subscriptions_api) | Users, organizations, roles, Stripe, magic-link auth |
-| [`bibliotheque`](https://github.com/Larose75-precogn/bibliotheque) | Connectors, bricks, BYOS org creation (the Apps Script glue) |
-| [`jdb`](https://github.com/Larose75-precogn/jdb) | Journal de Banque — staging → validation → journal |
+| [`byos`](https://github.com/Larose75-precogn/byos) | Own Storage — bricks registry, rules cascade, per-org encrypted secrets, technical journal, Drive |
+| [`identity`](https://github.com/Larose75-precogn/identity) | Organizations, users, roles, Stripe, magic-link, BYOS onboarding |
+| [`analyzor`](https://github.com/Larose75-precogn/analyzor) | Understanding — intent, embeddings retrieval, LLM reasoning |
+| [`executor`](https://github.com/Larose75-precogn/executor) | Execution / orchestration |
+| [`connector`](https://github.com/Larose75-precogn/connector) | All external-system connectors (Powens, Enable Banking, Mercury, Qonto, Docling, LLM, Drive) |
 
-Journal de Banque and the vertical modules (Compta Copro, Suivre mes comptes) live in their own repositories too. This repository is the front door and the docs.
+**Interfaces & shared**
+
+| Repository | What it implements |
+|---|---|
+| [`navigator`](https://github.com/Larose75-precogn/navigator) | Interface / navigation / Time |
+| [`communicator`](https://github.com/Larose75-precogn/communicator) | Communication / LLM / outputs |
+| [`bibliotheque`](https://github.com/Larose75-precogn/bibliotheque) | Common bricks & resources |
+
+**Vertical applications**
+
+| Repository | What it implements |
+|---|---|
+| [`jdb`](https://github.com/Larose75-precogn/jdb) | Journal de Banque — the bank as master flow for cash accounting |
+| [`compta-copro`](https://github.com/Larose75-precogn/compta-copro) | Homeowners-association accounting |
+| [`suivre_mes_comptes`](https://github.com/Larose75-precogn/suivre_mes_comptes) | Personal accounts / net worth |
+
+This repository is the front door and the docs. Every component above is its own focused repository.
 
 ## Verify it yourself
 
