@@ -19,3 +19,16 @@ worker/.wrangler/
 # OS
 .DS_Store
 Thumbs.db
+
+# menage-preseed: journaux de travail & artefacts — jamais publics
+CLAUDE.md
+CONTEXT.md
+.claude/
+*.bak
+*.bak_*
+*.bak-*
+.wrangler/
+node_modules/
+.env
+*.env
+.sheet_backups/
