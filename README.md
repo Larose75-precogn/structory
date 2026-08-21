@@ -83,9 +83,24 @@ Open source is the distribution engine, not a giveaway: you don't pay to read th
 
 Raising **€150k** · founder pseudonymous by choice · fully bootstrapped to date · zero fixed costs. This raise finalizes the core, ships the first production organizations, and prepares the 2027 Seed.
 
+## The code
+
+Structory is not one repository — it is a small set of focused services, each open and verifiable:
+
+| Repository | What it implements |
+|---|---|
+| [`ledger_api`](https://github.com/Larose75-precogn/ledger_api) | The journal — `ledger-cli` engine, FEC export, PCG rules, write-access roles |
+| [`analyzor`](https://github.com/Larose75-precogn/analyzor) | Bricks registry, BYOS / Drive, rules cascade, Docling, LLM, intent understanding |
+| [`executor`](https://github.com/Larose75-precogn/executor) | Orchestration + bank connectors (Powens, Enable Banking, Mercury, Qonto) |
+| [`subscriptions_api`](https://github.com/Larose75-precogn/subscriptions_api) | Users, organizations, roles, Stripe, magic-link auth |
+| [`bibliotheque`](https://github.com/Larose75-precogn/bibliotheque) | Connectors, bricks, BYOS org creation (the Apps Script glue) |
+| [`jdb`](https://github.com/Larose75-precogn/jdb) | Journal de Banque — staging → validation → journal |
+
+Journal de Banque and the vertical modules (Compta Copro, Suivre mes comptes) live in their own repositories too. This repository is the front door and the docs.
+
 ## Verify it yourself
 
-That's the whole point of open source here. The architecture, the running product and the source are public — nothing to take on faith. Read [`ARCHITECTURE.md`](ARCHITECTURE.md), run the 15-minute [`QUICKSTART.md`](QUICKSTART.md), open the [demos](https://structory.ai/compta). **The code is here — verify it yourself.**
+That's the whole point of open source here. The architecture, the running product and the source are public — nothing to take on faith. Read [`ARCHITECTURE.md`](ARCHITECTURE.md), run the 15-minute [`QUICKSTART.md`](QUICKSTART.md), open the [demos](https://structory.ai/compta), and browse the repositories above. **The code is here — verify it yourself.**
 
 ## License
 
