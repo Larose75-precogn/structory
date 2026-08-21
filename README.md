@@ -1,123 +1,98 @@
-# PreCogn - Interactive Homepage
+<div align="center">
 
-Homepage interactive réalisée avec Godot 4.7.
+# Structory
 
-## Architecture
+### The open-source operating system for financial organizations.
 
-```
-Phase 1 (idle)          Phase 2 (clic)           Phase 3 (+2s)
-┌─────────────┐        ┌─────────────┐         ┌─────────────┐
-│ Flow blanc  │  clic  │ Explosion   │  2s     │ PreCogn     │
-│ respirant   │───────→│ 4 atomes    │────────→│ Universal   │
-│ "Everything │        │ orbite+halo │         │ Objects...  │
-│ starts with │        │             │         │ Let's play  │
-│ a flow"     │        │             │         │             │
-└─────────────┘        └─────────────┘         └─────────────┘
-```
+**The organization owns the data. · The journal is the source of truth. · State is computed, never stored.**
 
-## Fichiers
+[Live demo](https://structory.ai/compta) · [Accounts demo](https://structory.ai/smc) · [structory.ai](https://structory.ai)
 
-| Fichier | Rôle |
-|---------|------|
-| `constants.gd` | Autoload - constantes globales (couleurs, timings, rayons) |
-| `main.gd` | Orchestrateur - machine à états Phase 1 → 2 → 3 |
-| `flow.gd` | Flow respirant organique, explosion, signal |
-| `atom.gd` | Atomes en orbite avec halo coloré |
-| `ui.gd` | UI - affichage progressif du contenu |
-| `Main.tscn` | Scène principale |
-| `flow.tscn` | Scène Flow |
-| `Atom.tscn` | Scène Atome |
+`5 services in production` · `~30,000 lines` · `1 core` · `1 journal format` · `Apache-2.0`
 
-## Export HTML5
+`open-source` · `ai-native` · `fintech` · `byos` · `accounting` · `ledger`
 
-### Prérequis
+</div>
 
-- Godot 4.7 installé
-- Templates d'export téléchargés (Editor → Manage Export Templates → Download)
+---
 
-### Build
+## The idea
 
-```bash
-./build.sh
-```
+**Structory doesn't store state. It stores history.**
 
-Ou manuellement :
-
-```bash
-# Import
-godot --headless --import
-
-# Export
-godot --headless --export-release "Web"
-```
-
-Les fichiers seront générés dans `export/web/` :
-- `index.html`
-- `index.js`
-- `index.wasm`
-- `index.pck`
-- `index.icon.png`
-- `index.apple-touch-icon.png`
-
-## Déploiement Cloudflare Worker
-
-### Structure Worker
+An organization is a **journal** — the chronological, append-only record of everything that happened to it. The balance sheet, the cash position, the reports are not stored anywhere: they are **computed views** of that journal, recalculated on demand.
 
 ```
-worker/
-├── wrangler.toml
-├── package.json
-├── src/
-│   └── index.js
-└── public/          ← copier ici les fichiers export/web/
+Journal → events → rules → time → computed state
+computed state → accounting · cash flow · budget · reporting · dashboards · AI · apps
 ```
 
-### Déploiement
+**Keep the journal. Rebuild any state. Forever.** Audit every action, and hand an AI agent the full, clean history of the organization. This is not "accounting with some AI" — it's a data infrastructure for organizations, whose first use case happens to be accounting.
 
-```bash
-# 1. Copier l'export dans worker/public/
-cp -r export/web/* worker/public/
+## The architecture
 
-# 2. Installer les dépendances
-cd worker
-npm install
-
-# 3. Déployer
-npx wrangler deploy
+```
+Own Storage  →  Journal  →  Objects / Flows / Rules / Time  →  Computed views  →  Applications & Agents
 ```
 
-### Headers requis
+Four universal building blocks structure everything: **Objects** (the entities), **Flows** (every event — "everything starts with a flow"), **Rules** (the business logic), **Time** (every event is dated). Every view is derived from them.
 
-Le Worker ajoute automatiquement les headers nécessaires pour Godot Web :
-- `Cross-Origin-Opener-Policy: same-origin`
-- `Cross-Origin-Embedder-Policy: require-corp`
+The whole design is one inversion of the usual model:
 
-Ces headers sont requis pour `SharedArrayBuffer` utilisé par Godot.
+| Traditional software | Structory |
+|---|---|
+| App → proprietary database → **your data locked in** | **Your journal, in your own storage** → common structure → **unlimited apps** |
 
-## Développement
+Applications no longer own the data. The organization does. This is **BYOS** — *Bring Your Own Storage*: the journal lives in a space the organization owns (today, its own Google Drive). Applications are only ways to read it and act on it — they never appropriate it.
 
-### Tester localement
+The journal is **append-only**: an entry is never modified or deleted. A correction is a *new* event, and the state is recomputed. Full history, perfect audit trail — the append-only event journal is the whole point.
 
-```bash
-# Ouvrir dans Godot
-godot
+## What exists
 
-# Ou exporter et servir avec un serveur HTTP
-./build.sh
-cd export/web
-python3 -m http.server 8000
-# Ouvrir http://localhost:8000
-```
+Five services in production — **four of them applications sharing one core and one journal format**, plus one standalone add-on:
 
-### Modifier les constantes
+| Product | What it is | Try it |
+|---|---|---|
+| **Ma Compta / Structory Ledger** | Accounting engine on `ledger-cli`, up to legal filings (FEC) | [demo](https://structory.ai/compta) |
+| **Suivre mes comptes** | Multi-account net worth (banks, life insurance, crypto…), daily email | [demo](https://structory.ai/smc) |
+| **Compta Copro** | First vertical — homeowners-association accounting, one real building live | [page](https://structory.ai/comptacopro) |
+| **Journal de Banque** | The bank flow as the **master flow** for cash accounting | [page](https://structory.ai/jdb) |
+| **SheetToCSV** | Standalone add-on, published on the Google Marketplace | — |
 
-Éditer `constants.gd` pour ajuster :
-- Couleurs (`COLOR_*`)
-- Rayon du Flow (`FLOW_BASE_RADIUS`)
-- Vitesse de respiration (`FLOW_BREATH_SPEED`)
-- Rayon d'orbite des atomes (`ATOM_ORBIT_RADIUS`)
-- Timing Phase 2 → 3 (`PHASE2_TO_PHASE3_DELAY`)
+*Journal de Banque, in particular:* balancing books against a bank is a permanent bottleneck of endless reconciliation. Structory makes the bank flow the **starting point** of cash accounting instead — a direct consequence of the architecture.
 
-## Licence
+## AI-native by design
 
-PreCogn - Universal Flow Engine
+The journal is the ideal context for an LLM: a single, structured, complete text file goes straight into the model — no database to traverse, no schema to reverse-engineer. An agent reads the whole organization, then acts (classify a transaction, draft a document, flag an anomaly), and **every action is written back as a new event** — fully auditable.
+
+Without this, each application rebuilds its own model of the same data. For AI agents, that means more synchronization, more duplication, and more context to reconstruct on every task. One journal removes all of it. Reasoning can run on a **local LLM** (Ollama) or a cloud model — the journal is the same clean context either way.
+
+## Open source & BYOS
+
+Built on proven engines, none reinvented: `ledger-cli` (20 years of double-entry accounting), `Docling` (document understanding), Ollama (local LLM), Google Drive (the organization's storage), Stripe (billing). Structory **organizes**; these engines compute. It makes `ledger-cli` — until now reserved for technical users — usable online, with nothing to install. And it stays open source.
+
+The journal and the organization's data live in storage the organization owns. That's what makes the whole thing trustworthy — and verifiable.
+
+## Business model
+
+**€1 / month per building block** — a building block is an **organization or a user**. One organization + one user = €1; then +€1 per additional org or user.
+
+Open source is the distribution engine, not a giveaway: you don't pay to read the code, you pay to **not operate it** (five services, local AI, bank connectors, storage you own), and for the network of organizations, modules and connectors around it — including a marketplace where partner modules pay €1/block and price freely on top.
+
+## Status — Pre-Seed
+
+Raising **€150k** · founder pseudonymous by choice · fully bootstrapped to date · zero fixed costs. This raise finalizes the core, ships the first production organizations, and prepares the 2027 Seed.
+
+## Verify it yourself
+
+That's the whole point of open source here. The architecture, the running product and the source are public — nothing to take on faith. Read [`ARCHITECTURE.md`](ARCHITECTURE.md), run the 15-minute [`QUICKSTART.md`](QUICKSTART.md), open the [demos](https://structory.ai/compta). **The code is here — verify it yourself.**
+
+## License
+
+[Apache License 2.0](LICENSE) — use it, run it, build on it.
+
+---
+
+<div align="center">
+<sub>structory.ai · contact via the site</sub>
+</div>
