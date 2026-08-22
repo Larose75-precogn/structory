@@ -32,3 +32,16 @@ node_modules/
 .env
 *.env
 .sheet_backups/
+
+# Homepage Godot precogn.org (déployée depuis ce dossier, hors dépôt vitrine)
+*.gd
+*.gd.uid
+*.tscn
+*.godot
+*.import
+*.cfg
+*.svg
+*.ps1
+*.sh
+.editorconfig
+worker/
